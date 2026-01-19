@@ -1,1 +1,14 @@
 @import "tailwindcss";
+
+/* Ensure the app background fills the whole viewport and remove white gaps */
+html, body, #root {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	min-height: 100vh;
+	background-color: #020617;
+	color: #fff;
+}

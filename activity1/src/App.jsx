@@ -1,20 +1,3 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-// import './App.css'
-
-// function App() {
-//   const [count, setCount] = useState(0)
-
-//   return (
-//     <div className="text-[20px]">Kirt John D. Balasabas
-//     <p>My Portfolio...</p>
-//     <p></p>
-//     </div>
-//   )
-// }
-
-// export default App
 import { useState } from "react";
 import "./App.css";
 import kirtID from "../img/kirtid.jpg";
@@ -27,166 +10,255 @@ function App() {
   };
 
   const Section = ({ title, id, children }) => (
-    <div className="border border-gray-700 rounded-2xl mb-4 overflow-hidden">
+    <div className="relative mb-5 overflow-hidden bg-black/30 backdrop-blur-sm border border-white/8 hover:border-blue-400/40 transition-all duration-300">
+      {/* vertical accent stripe */}
+      <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-400 to-purple-400" />
+
       <button
         onClick={() => toggleSection(id)}
-        className="w-full text-left px-6 py-4 bg-gray-800 hover:bg-gray-700 transition font-semibold text-lg"
+        className="w-full text-left px-10 py-4 bg-transparent hover:bg-white/5 active:scale-[0.98] transition-all duration-300 font-semibold text-lg tracking-wide"
       >
         {title}
       </button>
 
       <div
-        className={`transition-all duration-500 ease-in-out ${
-          openSection === id
-            ? "max-h-[1200px] opacity-100 p-6"
-            : "max-h-0 opacity-0 p-0"
-        } overflow-hidden bg-gray-900`}
+        className={`overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+          openSection === id ? "max-h-[1200px] opacity-100 py-6 px-10" : "max-h-0 opacity-0 py-0 px-10"
+        } bg-transparent`}
       >
-        {children}
+        <div className="text-left">{children}</div>
       </div>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white px-6 py-10">
-      <div className="max-w-4xl mx-auto">
+    <div className="relative min-h-screen text-white px-6 py-10 overflow-hidden">
 
-        {/* HEADER */}
-        <div className="flex flex-col md:flex-row items-center gap-6 mb-10">
+      {/* Background (fixed to viewport so it always fills the screen) */}
+      <div className="fixed inset-0 z-0 bg-gradient-to-br from-[#020617] via-[#04102a] to-[#0b1220]" />
+
+      {/* Glow Lights (fixed so they're not clipped by parent padding) */}
+      <div className="fixed top-[-200px] left-[-200px] w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[120px] z-0" />
+      <div className="fixed bottom-[-200px] right-[-200px] w-[500px] h-[500px] bg-purple-500/20 rounded-full blur-[120px] z-0" />
+
+      {/* Content */}
+      <div className="relative z-10 max-w-4xl mx-auto">
+
+        {/* Header */}
+        <div className="flex flex-col md:flex-row items-start gap-6 mb-12">
           <img
             src={kirtID}
             alt="Kirt John Balasabas"
-            className="w-40 h-40 rounded-2xl object-cover border-4 border-gray-700 shadow-lg"
+            className="w-40 h-40 rounded-2xl object-cover
+            border border-white/20
+            shadow-xl
+            hover:shadow-[0_0_40px_rgba(99,102,241,0.5)]
+            transition duration-500"
           />
           <div>
-            <h1 className="text-3xl font-bold">
+            <h1 className="text-3xl font-bold tracking-wide">
               Kirt John Dionson Balasabas
             </h1>
-            <p className="text-gray-400 mt-2">
+            <p className="text-gray-400 mt-2 text-left">
               Student • Aspiring Web & Software Developer
             </p>
           </div>
         </div>
 
-        {/* ABOUT ME */}
+        {/* About Me */}
         <Section title="About Me" id="about">
-          <p className="leading-relaxed text-gray-300">
+          <p className="leading-relaxed text-gray-300 text-justify">
             I am Kirt John Dionson Balasabas, born and raised in Santa Cruz,
             Occidental Mindoro. I have two younger sisters and currently reside
             in Poblacion 2, Santa Cruz, Occidental Mindoro.
             <br /><br />
-            My interest in technology started when I was in Grade 1, from trying
-            video games in a computer shop. Over time, my curiosity grew into
-            exploring how software systems work and how technology can be used
-            to create helpful and creative solutions.
+            My interest in technology started when I was in Grade 1 through
+            playing video games in a computer shop. This curiosity later grew
+            into exploring how software systems work and how technology can be
+            used to build creative and helpful solutions.
           </p>
         </Section>
 
-        {/* ACCOMPLISHMENTS */}
+        {/* Accomplishments */}
         <Section title="Accomplishments & Interests" id="accomplishments">
-          <ul className="list-disc list-inside text-gray-300 space-y-2">
-            <li>CSS NC II Holder</li>
-            <li>District Multimedia Head of our Church</li>
-            <li>
-              Ranked 1st in Project System Presentation (2025) among 3rd year
-              students
+          <ul className="space-y-3">
+            <li className="flex items-start gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 flex-shrink-0 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v8M8 12h8" />
+                <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="1" fill="none" />
+              </svg>
+              <span className="text-gray-300">CSS NC II Holder</span>
+            </li>
+
+            <li className="flex items-start gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 flex-shrink-0 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 2l2.09 6.26L20 9.27l-5 3.64L16.18 20 12 16.9 7.82 20 9 12.91l-5-3.64 5.91-.99L12 2z" />
+              </svg>
+              <span className="text-gray-300">District Multimedia Head of His Church</span>
+            </li>
+
+            <li className="flex items-start gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 flex-shrink-0 text-yellow-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 2l3 7h7l-5.5 4.5L20 21l-8-5-8 5 1.5-7.5L0 9h7l3-7z" />
+              </svg>
+              <span className="text-gray-300">Ranked 1st in Project System Presentation (2025)</span>
             </li>
           </ul>
 
-          <p className="mt-4 text-gray-300">
-            I am interested in software editing tools and understanding how
-            software systems are developed using creative ideas to build truly
-            helpful applications.
+          <p className="mt-4 text-gray-300 text-justify">
+            Interested in software editing tools and learning how different
+            software systems are created using creative ideas to build useful
+            and impactful applications.
           </p>
         </Section>
 
-        {/* SKILLS */}
+        {/* Skills */}
         <Section title="Skills" id="skills">
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h3 className="font-semibold mb-2">Programming Languages</h3>
-              <p className="text-gray-300">
-                HTML, CSS, JavaScript, PHP (Beginner)
-              </p>
+              <h3 className="font-semibold mb-3">Programming Languages</h3>
+              <ul className="space-y-2">
+                <li className="flex items-center gap-3">
+                  <span className="inline-flex items-center justify-center w-12 h-12 bg-white/5 rounded transition-transform duration-300 transform hover:scale-105 hover:brightness-105 hover:shadow-[0_0_14px_rgba(96,165,250,0.18)]">
+                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" alt="HTML5" className="w-8 h-8" loading="lazy" />
+                  </span>
+                  <span className="text-gray-300">HTML</span>
+                </li>
+
+                <li className="flex items-center gap-3">
+                  <span className="inline-flex items-center justify-center w-12 h-12 bg-white/5 rounded transition-transform duration-300 transform hover:scale-105 hover:brightness-105 hover:shadow-[0_0_14px_rgba(96,165,250,0.18)]">
+                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg" alt="CSS3" className="w-8 h-8" loading="lazy" />
+                  </span>
+                  <span className="text-gray-300">CSS</span>
+                </li>
+
+                <li className="flex items-center gap-3">
+                  <span className="inline-flex items-center justify-center w-12 h-12 bg-white/5 rounded transition-transform duration-300 transform hover:scale-105 hover:brightness-105 hover:shadow-[0_0_14px_rgba(96,165,250,0.18)]">
+                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="JavaScript" className="w-8 h-8" loading="lazy" />
+                  </span>
+                  <span className="text-gray-300">JavaScript</span>
+                </li>
+
+                <li className="flex items-center gap-3">
+                  <span className="inline-flex items-center justify-center w-12 h-12 bg-white/5 rounded transition-transform duration-300 transform hover:scale-105 hover:brightness-105 hover:shadow-[0_0_14px_rgba(96,165,250,0.18)]">
+                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/php/php-original.svg" alt="PHP" className="w-8 h-8" loading="lazy" />
+                  </span>
+                  <span className="text-gray-300">PHP (Beginner)</span>
+                </li>
+              </ul>
             </div>
 
             <div>
-              <h3 className="font-semibold mb-2">Tools & Frameworks</h3>
-              <p className="text-gray-300">
-                React, Bootstrap, Tailwind CSS, Visual Studio Code, Git (Beginner)
-              </p>
+              <h3 className="font-semibold mb-3">Tools & Frameworks</h3>
+              <ul className="space-y-2">
+                <li className="flex items-center gap-3">
+                  <span className="inline-flex items-center justify-center w-12 h-12 bg-white/5 rounded transition-transform duration-300 transform hover:scale-105 hover:brightness-105 hover:shadow-[0_0_14px_rgba(96,165,250,0.18)]">
+                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg" alt="React" className="w-8 h-8" loading="lazy" />
+                  </span>
+                  <span className="text-gray-300">React</span>
+                </li>
+
+                <li className="flex items-center gap-3">
+                  <span className="inline-flex items-center justify-center w-12 h-12 bg-white/5 rounded transition-transform duration-300 transform hover:scale-105 hover:brightness-105 hover:shadow-[0_0_14px_rgba(96,165,250,0.18)]">
+                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain.svg" alt="Bootstrap" className="w-8 h-8" loading="lazy" />
+                  </span>
+                  <span className="text-gray-300">Bootstrap</span>
+                </li>
+
+                <li className="flex items-center gap-3">
+                  <span className="inline-flex items-center justify-center w-12 h-12 bg-[#06B6D4]/10 rounded transition-transform duration-300 transform hover:scale-105 hover:brightness-105 hover:shadow-[0_0_14px_rgba(96,165,250,0.18)]">
+                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/tailwindcss/tailwindcss-plain.svg" alt="Tailwind CSS" className="w-8 h-8" loading="lazy" />
+                  </span>
+                  <span className="text-gray-300">Tailwind CSS</span>
+                </li>
+
+                <li className="flex items-center gap-3">
+                  <span className="inline-flex items-center justify-center w-12 h-12 bg-white/5 rounded transition-transform duration-300 transform hover:scale-105 hover:brightness-105 hover:shadow-[0_0_14px_rgba(96,165,250,0.18)]">
+                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vscode/vscode-original.svg" alt="VS Code" className="w-8 h-8" loading="lazy" />
+                  </span>
+                  <span className="text-gray-300">Visual Studio Code</span>
+                </li>
+
+                <li className="flex items-center gap-3">
+                  <span className="inline-flex items-center justify-center w-12 h-12 bg-white/5 rounded transition-transform duration-300 transform hover:scale-105 hover:brightness-105 hover:shadow-[0_0_14px_rgba(96,165,250,0.18)]">
+                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg" alt="Git" className="w-8 h-8" loading="lazy" />
+                  </span>
+                  <span className="text-gray-300">Git</span>
+                </li>
+              </ul>
             </div>
           </div>
         </Section>
 
-        {/* PROJECTS */}
+        {/* Projects */}
         <Section title="Projects" id="projects">
           <div className="space-y-4 text-gray-300">
             <div>
               <h4 className="font-semibold">
-                Hardware Price Management System
+                GreenBin
               </h4>
-              <p>
-                An academic project designed to manage hardware prices using
-                arrays as a simple database.
+              <p className="text-gray-300 text-justify">
+                An environmental project designed to promote proper waste segregation and responsible disposal. It features collection mapping and a real-time update system, allowing communities to monitor waste collection and manage disposal efficiently. The project aims to reduce pollution, improve cleanliness, and foster sustainable practices in schools, barangays, and public areas.
               </p>
               <p className="text-sm text-gray-400">
                 Technologies: HTML, CSS, JavaScript, PHP
+              </p>
+              <p className="text-sm text-gray-400">
+                Role: Full-Stack Developer
               </p>
             </div>
 
             <div>
               <h4 className="font-semibold">
-                Scholarship Grant Monitoring System
+                AutoBin
               </h4>
-              <p>
-                A system created to monitor scholarship grants without using a
-                database.
+              <p className="text-gray-300 text-justify">
+                An IoT-based project designed to monitor garbage bin waste levels and provide real-time alerts. It features automatic sensing and instant notifications, allowing communities to track bin capacity and schedule timely waste collection. The project aims to prevent overflow, improve cleanliness, and support efficient waste management in schools, barangays, and public areas.
               </p>
               <p className="text-sm text-gray-400">
-                Technologies: Visual Basic, HTML, CSS
+                Technologies: HTML, CSS, JavaScript, PHP
+              </p>
+              <p className="text-sm text-gray-400">
+                Role: Full-Stack Developer
               </p>
             </div>
 
             <div>
-              <h4 className="font-semibold">Church Multimedia Projects</h4>
-              <p>
-                Video editing, presentation design, and visual content creation
-                for church events.
+              <h4 className="font-semibold">BarangayCare</h4>
+              <p className="text-gray-300 text-justify">
+                A digital project designed to streamline appointments and provide information updates for Barangay Health Workers (BHWs). It features online scheduling and real-time notifications, allowing residents to stay informed efficiently. The project aims to improve community health service delivery, enhance communication, and support organized and accessible healthcare in barangays.
+              </p>
+              <p className="text-sm text-gray-400">
+                Technologies: HTML, CSS, JavaScript, PHP
+              </p>
+              <p className="text-sm text-gray-400">
+                Role: Full-Stack Developer
               </p>
             </div>
           </div>
         </Section>
 
-        {/* REFLECTION */}
+        {/* Reflection */}
         <Section title="Reflection" id="reflection">
           <div className="space-y-4 text-gray-300">
-            <p>
-              <strong>Technologies used and why:</strong> I used HTML, CSS,
-              JavaScript, PHP, React, Bootstrap, and Tailwind CSS because they
-              are essential for web development and suitable for my current
-              skill level.
+            <p className="text-justify">
+              <strong>Technologies used and why:</strong> For this portfolio, I mainly used React.js with Vite for building the web interface because it is fast, modern, and efficient for creating interactive applications. I also used Tailwind CSS to style the components easily and achieve a clean, responsive design. These technologies helped me organize my project better and make it visually appealing while keeping the code simple and maintainable.
             </p>
 
-            <p>
-              <strong>Easiest part:</strong> Writing the About Me section was
-              easiest because it is based on my personal experience.
+            <p className="text-justify">
+              <strong>Easiest part:</strong> The easiest parts for me were structuring the layout and adding basic content. Since I already have experience with HTML, CSS, and some JavaScript, setting up the pages and arranging sections felt straightforward. Styling components with Tailwind also made it easier to apply consistent colors, spacing, and typography. Also, I used AI to help me generate some parts of the code.
             </p>
 
-            <p>
-              <strong>Most challenging part:</strong> Explaining my projects
-              technically was the most challenging.
+            <p className="text-justify">
+              <strong>Most challenging part:</strong> The most challenging part was making the portfolio interactive, especially when adding dynamic effects like hover animations and light/gradient effects. I had to experiment with different approaches and tweak the code several times to achieve the look and functionality I wanted.
             </p>
 
-            <p>
-              <strong>Technologies I want to learn:</strong> Advanced web
-              development, AI, mobile app development, and database management.
+            <p className="text-justify">
+              <strong>Technologies I want to learn:</strong> I am most interested in technologies like GIS mapping, Artificial Intelligence, and Machine Learning. I want to explore how these tools can be integrated into real-world applications to make systems smarter, more efficient, and capable of handling complex data.
             </p>
 
-            <p>
-              <strong>Future applications:</strong> I want to build creative
-              and practical software systems that can help people in real-life
-              situations.
+            <p className="text-justify">
+              <strong>Future applications:</strong> I want to build practical and community-focused applications, such as smart environmental management systems, health monitoring platforms, or intelligent public service tools. Projects that solve real problems, improve everyday life, and promote sustainability using emerging technologies.
             </p>
           </div>
         </Section>
