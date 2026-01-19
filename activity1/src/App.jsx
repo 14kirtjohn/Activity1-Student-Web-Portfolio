@@ -7,8 +7,9 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className="text-[20px]">Kirt John Balasabas
+    <div className="text-[20px]">Kirt John D. Balasabas
     <p>My Portfolio...</p>
+    <p></p>
     </div>
   )
 }
