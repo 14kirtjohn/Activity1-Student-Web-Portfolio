@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className="text-[20px]">Kirt John Balasabas
-    <p>My Portfolios</p>
+    <p>My Portfolio...</p>
     </div>
   )
 }
