@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import kirtID from "../img/kirtid.jpg";
 
@@ -13,6 +13,28 @@ function App() {
     setOpenSection(section);
     const el = document.getElementById(section);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  // Small typing component for header
+  const Typing = ({ text, speed = 80, className = "" }) => {
+    const [display, setDisplay] = useState("");
+    useEffect(() => {
+      let i = 0;
+      setDisplay("");
+      const id = setInterval(() => {
+        i += 1;
+        setDisplay(text.slice(0, i));
+        if (i >= text.length) clearInterval(id);
+      }, speed);
+      return () => clearInterval(id);
+    }, [text, speed]);
+
+    return (
+      <p className={className}>
+        {display}
+        <span className="typing-cursor">|</span>
+      </p>
+    );
   };
 
   const Section = ({ title, id, children }) => (
@@ -87,14 +109,13 @@ function App() {
           <div className="pt-12">
             <div className="grid md:grid-cols-2 items-center gap-8">
               <div className="space-y-6">
-                <p className="text-gray-400">Hello, I'm</p>
-                <h2 className="text-5xl md:text-7xl font-extrabold leading-tight text-slate-200">
-                  Kirt John
-                  <br />
-                  Dionson Balasabas
+                <Typing text={"Hello, I'm"} speed={70} className="text-lg md:text-2xl text-gray-400" />
+                <h2 className="text-5xl md:text-7xl font-extrabold leading-tight">
+                  <span className="gradient-animate block">Kirt John</span>
+                  <span className="gradient-animate block">Dionson Balasabas</span>
                 </h2>
                 <p className="text-gray-400 max-w-xl text-justify">Student • Aspiring Web & Software Developer</p>
-                <a href="#contact" className="inline-block mt-2 text-sm font-semibold text-white border-b border-white/30">Contact Me</a>
+                <a href="#contact" className="inline-block mt-2 text-sm font-semibold text-white border-b border-white/30">Occidental Mindoro State College - Mamburao Campus</a>
               </div>
 
               <div className="flex justify-center md:justify-end">
