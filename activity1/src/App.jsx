@@ -9,8 +9,14 @@ function App() {
     setOpenSection(openSection === section ? null : section);
   };
 
+  const navigateTo = (section) => {
+    setOpenSection(section);
+    const el = document.getElementById(section);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   const Section = ({ title, id, children }) => (
-    <div className="relative mb-5 overflow-hidden bg-black/30 backdrop-blur-sm border border-white/8 hover:border-blue-400/40 transition-all duration-300">
+    <div id={id} className="relative mb-5 overflow-hidden bg-black/30 backdrop-blur-sm border border-white/8 hover:border-blue-400/40 transition-all duration-300">
       {/* vertical accent stripe */}
       <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-400 to-purple-400" />
 
@@ -44,26 +50,61 @@ function App() {
       {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto">
 
-        {/* Header */}
-        <div className="flex flex-col md:flex-row items-start gap-6 mb-12">
-          <img
-            src={kirtID}
-            alt="Kirt John Balasabas"
-            className="w-40 h-40 rounded-2xl object-cover
-            border border-white/20
-            shadow-xl
-            hover:shadow-[0_0_40px_rgba(99,102,241,0.5)]
-            transition duration-500"
-          />
-          <div>
-            <h1 className="text-3xl font-bold tracking-wide">
-              Kirt John Dionson Balasabas
-            </h1>
-            <p className="text-gray-400 mt-2 text-left">
-              Student • Aspiring Web & Software Developer
-            </p>
+        {/* Header (topbar + hero) */}
+        <header className="relative mb-12">
+          {/* Top bar: brand left, centered nav, github right */}
+          <div className="absolute inset-x-0 top-4 flex items-center justify-between px-6 z-20">
+            <div className="flex items-center gap-3">
+              <span className="font-semibold text-lg"></span>
+            </div>
+
+            <nav className="flex items-center gap-6 ml-6">
+              <ul className="flex gap-6">
+                <li>
+                  <a href="#about" onClick={(e)=>{e.preventDefault(); navigateTo('about');}} className="text-gray-300 hover:text-white transition">About Me</a>
+                </li>
+                <li>
+                  <a href="#accomplishments" onClick={(e)=>{e.preventDefault(); navigateTo('accomplishments');}} className="text-gray-300 hover:text-white transition">Interests</a>
+                </li>
+                <li>
+                  <a href="#skills" onClick={(e)=>{e.preventDefault(); navigateTo('skills');}} className="text-gray-300 hover:text-white transition">Skills</a>
+                </li>
+                <li>
+                  <a href="#projects" onClick={(e)=>{e.preventDefault(); navigateTo('projects');}} className="text-gray-300 hover:text-white transition">Projects</a>
+                </li>
+                <li>
+                  <a href="#reflection" onClick={(e)=>{e.preventDefault(); navigateTo('reflection');}} className="text-gray-300 hover:text-white transition">Reflection</a>
+                </li>
+              </ul>
+            </nav>
+
+            <a href="https://github.com/14kirtjohn" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="text-white" xmlns="http://www.w3.org/2000/svg"><path d="M12 .5C5.648.5.5 5.648.5 12c0 5.084 3.292 9.39 7.87 10.91.576.106.785-.25.785-.556 0-.274-.01-1-.015-1.96-3.2.696-3.878-1.542-3.878-1.542-.523-1.33-1.277-1.684-1.277-1.684-1.044-.714.08-.7.08-.7 1.155.082 1.763 1.186 1.763 1.186 1.026 1.757 2.692 1.25 3.347.956.104-.743.402-1.25.73-1.537-2.553-.291-5.238-1.276-5.238-5.676 0-1.254.448-2.279 1.183-3.083-.119-.292-.513-1.468.112-3.06 0 0 .965-.31 3.162 1.179a10.99 10.99 0 0 1 2.88-.387c.977.005 1.96.132 2.88.387 2.195-1.49 3.158-1.179 3.158-1.179.627 1.592.233 2.768.114 3.06.737.804 1.18 1.829 1.18 3.083 0 4.412-2.69 5.381-5.252 5.667.413.356.78 1.056.78 2.128 0 1.538-.014 2.777-.014 3.156 0 .308.206.669.79.555C20.713 21.387 24 17.083 24 12c0-6.352-5.148-11.5-11.5-11.5z" fill="currentColor"/></svg>
+            </a>
           </div>
-        </div>
+
+          {/* Hero: left text, right portrait */}
+          <div className="pt-12">
+            <div className="grid md:grid-cols-2 items-center gap-8">
+              <div className="space-y-6">
+                <p className="text-gray-400">Hello, I'm</p>
+                <h2 className="text-5xl md:text-7xl font-extrabold leading-tight text-slate-200">
+                  Kirt John
+                  <br />
+                  Dionson Balasabas
+                </h2>
+                <p className="text-gray-400 max-w-xl text-justify">Student • Aspiring Web & Software Developer</p>
+                <a href="#contact" className="inline-block mt-2 text-sm font-semibold text-white border-b border-white/30">Contact Me</a>
+              </div>
+
+              <div className="flex justify-center md:justify-end">
+                <div className="w-64 h-80 bg-white/5 rounded-[28px] overflow-hidden border border-white/10 shadow-xl">
+                  <img src={kirtID} alt="Kirt John Balasabas" className="w-full h-full object-cover" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
 
         {/* About Me */}
         <Section title="About Me" id="about">
@@ -83,24 +124,23 @@ function App() {
         <Section title="Accomplishments & Interests" id="accomplishments">
           <ul className="space-y-3">
             <li className="flex items-start gap-3">
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 flex-shrink-0 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v8M8 12h8" />
-                <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="1" fill="none" />
-              </svg>
+              <span className="inline-flex items-center justify-center w-8 h-8 bg-white/5 rounded transition-transform duration-200">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/certificate.png" alt="certificate" className="w-5 h-5" loading="lazy" />
+              </span>
               <span className="text-gray-300">CSS NC II Holder</span>
             </li>
 
             <li className="flex items-start gap-3">
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 flex-shrink-0 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 2l2.09 6.26L20 9.27l-5 3.64L16.18 20 12 16.9 7.82 20 9 12.91l-5-3.64 5.91-.99L12 2z" />
-              </svg>
-              <span className="text-gray-300">District Multimedia Head of His Church</span>
+              <span className="inline-flex items-center justify-center w-8 h-8 bg-white/5 rounded transition-transform duration-200">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/groups.png" alt="groups" className="w-5 h-5" loading="lazy" />
+              </span>
+              <span className="text-gray-300">District Multimedia Head of our Church</span>
             </li>
 
             <li className="flex items-start gap-3">
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 flex-shrink-0 text-yellow-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 2l3 7h7l-5.5 4.5L20 21l-8-5-8 5 1.5-7.5L0 9h7l3-7z" />
-              </svg>
+              <span className="inline-flex items-center justify-center w-8 h-8 bg-white/5 rounded transition-transform duration-200">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/trophy.png" alt="trophy" className="w-5 h-5" loading="lazy" />
+              </span>
               <span className="text-gray-300">Ranked 1st in Project System Presentation (2025)</span>
             </li>
           </ul>
